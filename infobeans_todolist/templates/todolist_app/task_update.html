@@ -1,0 +1,31 @@
+{% extends "todolist_app/base.html" %}
+{% block body_block %}
+  </form>
+    <div class="container">
+        <div class="row" style="margin-top:50px">
+            <div class="col-md-12">
+                <div class="card card-white mt-100">
+                    <div class="card-body">
+                      <h2 class="text-center">Edit Task</h2>
+                      <form method="post" action="{% url 'todolist_app:edit_task' task_id=task.id %}">
+                        {% csrf_token %}
+                        <div class="form-outline mb-4">
+                          <label class="form-label" for="description">Title:</label>
+                          <input class="form-control form-control-lg" id="task_title" name="task_title" value="{{ task.task_title }}"/>
+                        </div>
+                        <div class="form-outline mb-4">
+                          <label class="form-label" for="task_description">Description:</label>
+                          <textarea class="form-control form-control-lg" id="task_description" name="task_description" value="{{ task.task_description}}"></textarea>
+                        </div>
+                        <div class="form-outline mb-4">
+                          <label class="form-label" for="task_status">Status:</label>
+                          <input type="checkbox" id="task_status" name="task_status" value="value="{{ task.task_status }}"">
+                        </div>
+                        <button class="btn btn-dark"  type="submit">Edit Task</button>
+                      </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

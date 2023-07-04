@@ -1,0 +1,30 @@
+<!-- Header -->
+{% block header_block %}
+  <header>
+    <nav class="navbar navbar-expand-sm bg-dark">
+      <div class="container-fluid">
+        <!-- Links -->
+        <ul class="navbar-nav">
+        {% if not user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link text-light" href="{% url 'todolist_app:user_login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="{% url 'todolist_app:user_register' %}">Sign Up</a>
+            </li>
+           {% else %}
+            <li class="nav-item">
+              <a class="nav-link text-light" href="{% url 'todolist_app:task_list' %}">ToDo</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="{% url 'todolist_app:task_add' %}">Add Task</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="{% url 'todolist_app:user_logout' %}">Logout</a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+  </header>
+{% endblock %}
