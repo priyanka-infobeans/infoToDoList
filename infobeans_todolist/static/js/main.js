@@ -1,101 +1,15 @@
-$( document ).ready(function() {
+$(document).ready(function() {
+  if ($('.task-checkbox').is(':checked')) {
+    $(this).next('#task-title').css('text-decoration', 'line-through');
+  } else {
+    $(this).next('#task-title').css('text-decoration', '');
+  }
 
-    "use strict";
-
-    var todo = function() {
-        $('.todo-list .todo-item input').click(function() {
-        if($(this).is(':checked')) {
-            $(this).parent().parent().parent().toggleClass('complete');
-        } else {
-            $(this).parent().parent().parent().toggleClass('complete');
-        }
-    });
-
-    $('.todo-nav .all-task').click(function() {
-        $('.todo-list').removeClass('only-active');
-        $('.todo-list').removeClass('only-complete');
-        $('.todo-nav li.active').removeClass('active');
-        $(this).addClass('active');
-    });
-
-    $('.todo-nav .active-task').click(function() {
-        $('.todo-list').removeClass('only-complete');
-        $('.todo-list').addClass('only-active');
-        $('.todo-nav li.active').removeClass('active');
-        $(this).addClass('active');
-    });
-
-    $('.todo-nav .completed-task').click(function() {
-        $('.todo-list').removeClass('only-active');
-        $('.todo-list').addClass('only-complete');
-        $('.todo-nav li.active').removeClass('active');
-        $(this).addClass('active');
-    });
-
-    $('#uniform-all-complete input').click(function() {
-        if($(this).is(':checked')) {
-            $('.todo-item .checker span:not(.checked) input').click();
-        } else {
-            $('.todo-item .checker span.checked input').click();
-        }
-    });
-
-    $('.remove-todo-item').click(function() {
-        $(this).parent().remove();
-    });
-    };
-
-    todo();
-
-    $(".add-task").keypress(function (e) {
-        if ((e.which == 13)&&(!$(this).val().length == 0)) {
-            $('<div class="todo-item"><div class="checker"><span class=""><input type="checkbox"></span></div> <span>' + $(this).val() + '</span> <a href="javascript:void(0);" class="float-right remove-todo-item"><i class="icon-close"></i></a></div>').insertAfter('.todo-list .todo-item:last-child');
-            $(this).val('');
-        } else if(e.which == 13) {
-            alert('Please enter new task');
-        }
-        $(document).on('.todo-list .todo-item.added input').click(function() {
-            if($(this).is(':checked')) {
-                $(this).parent().parent().parent().toggleClass('complete');
-            } else {
-                $(this).parent().parent().parent().toggleClass('complete');
-            }
-        });
-        $('.todo-list .todo-item.added .remove-todo-item').click(function() {
-            $(this).parent().remove();
-        });
-    });
-    $('.add-task"').on('keypress', function(event) {alert('hi')
-        if (event.which === 13) {
-            event.preventDefault();  // Prevent the default form submission
-
-            var title       = $('#task-title').val();
-            var description = $('#task-description').val();
-            var status      = 'Active';
-
-            $.ajax({
-                url: '/task_add/',
-                method: 'POST',
-                data: {
-                    'task_title': title,
-                    'task_description': description
-                    'task_status' : status
-                },
-                dataType: 'json',
-                success: function(response) {
-                    if (response.status === 'success') {
-                        var taskId = response.task_id;
-                        // Perform any necessary actions after successfully adding the task
-                        console.log('Task added successfully with ID:', taskId);
-                    } else {
-                        // Handle any error cases
-                        console.log('Error occurred while adding task');
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.log('AJAX request error:', error);
-                }
-            });
-        }
-    });
-});
+  $('.task-checkbox').change(function() {
+    if ($(this).is(':checked')) {
+      $(this).next('#task-title').addClass('task-title-line-through');
+    } else {
+      $(this).next('#task-title').removeClass('task-title-line-through');
+    }
+  });
+})

@@ -11,18 +11,20 @@ Class-based views
     2. Add a URL to urlpatterns:  path('', Home.as_view(), name='task_add')
 Including another URLconf
     1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+    2. Add a URL to urlpatterns:  path('', include('blog_app.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include
-from todolist_app import views
+from django.urls import path, include
+from infobeans_todolist import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.user_login, name='user_login'),
-    path('', include('todolist_app.urls')),
-    path('task_add/', views.task_add, name='task_add'),
-    path('task_add/', views.task_add, name='task_add'),
+    path('', views.home_view.as_view(), name='home'),
+    path('login/', views.user_login, name='login'),
+    path('register/', views.user_register, name='register'),
+    path('logout/', views.user_logout, name='logout'),
+    path('create/', views.create_user_profile, name='create_user_profile'),
+    path('user_profile/', views.user_profile, name='user_profile'),
     path('todolist_app/', include('todolist_app.urls')),
-    path('task_list', views.task_list, name='task_list'),
+    path('blog_app/', include('blog_app.urls')),
 ]

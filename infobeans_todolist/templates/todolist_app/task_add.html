@@ -1,4 +1,4 @@
-{% extends "todolist_app/base.html" %}
+{% extends "base.html" %}
 {% block body_block %}
 {% load static %}
     <div class="container">
@@ -12,25 +12,58 @@
                             {{ success_message }}
                         </div>
                       {% endif %}
-                      <form method="post" action="{% url 'todolist_app:create_task' %}">
+                      <form method="post" action="{% url 'todolist_app:task_add' %}">
                         {% csrf_token %}
                         <div class="form-outline mb-4">
                           <label class="form-label" for="description">Title:</label>
-                          <input class="form-control form-control-lg" id="task_title" name="task_title" required/>
+                          <input class="form-control" id="task_title" name="task_title" required/>
                         </div>
                         <div class="form-outline mb-4">
                           <label class="form-label" for="task_description">Description:</label>
-                          <textarea class="form-control form-control-lg" id="task_description" name="task_description" required></textarea>
+                          <textarea class="form-control " id="task_description" name="task_description" required></textarea>
                         </div>
                         <div class="form-outline mb-4">
                           <label class="form-label" for="task_status">Status:</label>
                           <input type="checkbox" id="task_status" name="task_status">
                         </div>
-                        <button class="btn btn-dark"  type="submit">Add Task</button>
+                        <button class="btn btn-danger"  type="submit">Add Task</button>
                       </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-10">
+        <div class="card" style="border-radius: 15px;">
+          <div class="card-body p-5">
+            <h6 class="mb-3">Here is your ToDo's</h6>
+            <ul class="list-group mb-0">
+               {% for task in tasks %}
+                <li
+                  class="list-group-item d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
+                  <div class="align-items-center">
+                    <input class="form-check-input me-2" type="checkbox" value="{{ task.task_status }}" {% if task.task_status == 1 %} checked {% endif %}/>
+                     <span id="task-title">{{ task.task_title }}</span> <br/><br/>
+                      <p id="task-description">{{ task.task_description }}</p>
+                  </div>
+                  <div class="align-items-center">
+                    <a href="{% url 'todolist_app:edit_task' task_id=task.id %}" title="Edit item">
+                      <i class="fa fa-edit"></i> &nbsp; &nbsp;
+                    </a>
+                    <a href="{% url 'todolist_app:delete_task' task.id %}" title="Remove item">
+                      <i class='fa fa-trash'></i>
+                    </a>
+                  </div>
+                </li>
+              {% endfor %}
+            </ul>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 {% endblock %}

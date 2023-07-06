@@ -1,5 +1,6 @@
 from django.db import models
 class TodoList(models.Model):
+    user_id             = models.
     task_title          = models.CharField(max_length=256)
     task_status         = models.BooleanField(default=False)
     task_description    = models.CharField(max_length=256)
