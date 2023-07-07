@@ -1,0 +1,9 @@
+<!-- Add the HTML form for post creation -->
+{% extends "blog_app/base.html" %}
+{% block body_block %}
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Create Post</button>
+  </form>
+{% endblock %}

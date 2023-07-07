@@ -44,9 +44,10 @@
                 <li
                   class="list-group-item d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
                   <div class="align-items-center">
-                    <input class="form-check-input me-2" type="checkbox" value="{{ task.task_status }}" {% if task.task_status == 1 %} checked {% endif %}/>
-                     <span id="task-title">{{ task.task_title }}</span> <br/><br/>
-                      <p id="task-description">{{ task.task_description }}</p>
+                    {% csrf_token %}
+                    <input class="form-check-input me-2 task-checkbox" id="task-checkbox" type="checkbox" value="{{ task.task_status }}" {% if task.task_status == 1 %} checked {% endif %} data-task-id="{{ task.id }}"/>
+                    <span id="task-title" {% if task.task_status == 1 %}class="task-title-line-through"{% endif %}>{{ task.task_title }}</span> <br/><br/>
+                    <p id="task-description">{{ task.task_description }}</p>
                   </div>
                   <div class="align-items-center">
                     <a href="{% url 'todolist_app:edit_task' task_id=task.id %}" title="Edit item">

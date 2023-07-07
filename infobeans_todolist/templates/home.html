@@ -2,11 +2,11 @@
 {% block body_block %}
 <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center">
   <div class="col-md-5 p-lg-5 mx-auto my-5">
-    <h1 class="display-4 font-weight-normal">Welcome!</h1>
-    <p class="lead font-weight-normal">Create your own todo list to make things easy and more productive also explore blogs here.</p>
+    <h4 class="text-light">Welcome!</h4>
+    <h4 class="text-light">Create your own todo list and for more updates visit blogs site.</h4><br/><br/>
       <a href="{% url 'login' %}">
           <button type="button" class="btn btn-danger btn-lg mr-30 rounded-pill">Generate ToDo's</button>
-      </a>
+      </a>&nbsp;&nbsp;&nbsp;&nbsp;
       <a href="{% url 'blog_app:index' %}">
           <button type="button" class="btn btn-danger btn-lg rounded-pill">Explore Blogs</button>
       </a>

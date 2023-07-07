@@ -27,4 +27,5 @@ urlpatterns = [
     path('user_profile/<str:name>/', views.user_profile, name='user_profile'),
     path('todolist_app/', include('todolist_app.urls')),
     path('blog_app/', include('blog_app.urls')),
+    path('social_app/', include('social_app.urls')),
 ]

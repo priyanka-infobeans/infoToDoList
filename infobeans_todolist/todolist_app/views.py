@@ -3,6 +3,7 @@ from django.views.generic import TemplateView
 from .forms import TodoListForm
 from .models import TodoList
 from django.contrib import messages
+from django.http import JsonResponse
 
 # Create your views here.
 class index_view(TemplateView):
@@ -63,3 +64,23 @@ def edit_task(request, task_id):
     else:
         form = TodoListForm(instance=task)
     return render(request, 'todolist_app/task_update.html', {'form': form, 'task': task})
+
+def update_title_status(request):
+    if request.method == 'POST':
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            task_id     = request.POST.get('task_id')
+            is_checked  = request.POST.get('is_checked')
+
+            # Retrieve the ToDoList object based on the task_id
+            try:
+                print('step1')
+                todo = TodoList.objects.get(id=task_id)
+                todo.title_status = is_checked
+                todo.save()
+                return JsonResponse({'success': True})
+            except TodoList.DoesNotExist:
+                print('step2')
+                return JsonResponse({'success': False, 'error': 'Task not found.'})
+    else:
+        print('step3')
+        return JsonResponse({'success': False, 'error': 'Invalid request.'})

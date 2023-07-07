@@ -1,8 +1,25 @@
 {% block footer_block %}
+{% load static %}
 <!-- Footer -->
-  <footer>
+  <footer style="all: unset;">
     <p class="text-center bg-dark text-light fixed-bottom my-0 small">
       © Copyright 2023 InfoBeans. All Rights Reserved
     </p>
   </footer>
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'blog_app/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="v{% static 'blog_app/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+  <!-- Additional Scripts -->
+  <script src="{% static 'blog_app/js/custom.js' %}"></script>
+  <script src="{% static 'blog_app/js/owl.js' %}"></script>
+  <script src="{% static 'blog_app/js/slick.js' %}"></script>
+  <script src="{% static 'blog_app/js/isotope.js' %}"></script>
+  <script src="{% static 'blog_app/js/accordions.js' %}"></script>
+  <script>
+    // Assign the value of djangoAjax from the server-side
+    var djangoAjax = "{{ djangoAjax_value }}";
+  </script>
+  <script src="{% static 'js/main.js' %}"></script>
+
 {% endblock %}

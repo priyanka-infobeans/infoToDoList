@@ -10,7 +10,7 @@
                       <form method="post" action="{% url 'todolist_app:edit_task' task_id=task.id %}">
                         {% csrf_token %}
                           {{ form.as_p }}
-                        <button class="btn btn-dark"  type="submit">Edit Task</button>
+                        <button class="btn btn-danger"  type="submit">Edit Task</button>
                       </form>
                     </div>
                 </div>
