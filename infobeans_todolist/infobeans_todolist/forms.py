@@ -40,3 +40,13 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ['name', 'email', 'profile_photo', 'bio']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['name'].widget.attrs.update({'class': 'form-control'})
+        self.fields['email'].widget.attrs.update({'class':'form-control'})
+        self.fields['bio'].widget.attrs.update({'class': 'form-control'})
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['profile_photo'].required = False

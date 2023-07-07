@@ -24,7 +24,7 @@ urlpatterns = [
     path('register/', views.user_register, name='register'),
     path('logout/', views.user_logout, name='logout'),
     path('create/', views.create_user_profile, name='create_user_profile'),
-    path('user_profile/', views.user_profile, name='user_profile'),
+    path('user_profile/<str:name>/', views.user_profile, name='user_profile'),
     path('todolist_app/', include('todolist_app.urls')),
     path('blog_app/', include('blog_app.urls')),
 ]

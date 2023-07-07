@@ -17,8 +17,12 @@
     <link rel="stylesheet" href="{% static 'blog_app/css/owl.css' %}">
   </head>
   <body>
+    {% include 'blog_app/header.html' %}
     <!-- Content block -->
+    <div class="content">
       {% block body_block %}
       {% endblock %}
+    </div>
+    {% include 'blog_app/footer.html' %}
   </body>
 </html>

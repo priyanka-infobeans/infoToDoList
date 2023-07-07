@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from .forms import RegistrationForm
 from django.contrib import messages
 from .forms import UserProfileForm
+from .models import UserProfile
 
 class home_view(TemplateView):
     template_name = 'home.html'
@@ -64,7 +65,7 @@ def user_register(request):
             my_user = User.objects.create_user(username=username, email=email, password=password1)
             my_user.save()
             # Add a success message
-            messages.success(request, 'Registration successful!')
+            messages.success(request, 'Registration successful! Please complete your profile.')
             return redirect('create_user_profile')
     else:
         # Clear the form errors to prevent them from being displayed on the page
@@ -73,7 +74,7 @@ def user_register(request):
 
 
 @login_required
-def user_profile(request):
+def user_profile(request, name):
     user = request.user
     user_profile = user.userprofile
 
@@ -83,7 +84,7 @@ def user_profile(request):
             form.save()
             return redirect('user_profile')
     else:
-        form = UserProfileForm(instance=user_profile)
+        form = get_object_or_404(UserProfile, user__username=name)
 
     context = {'form': form}
     return render(request, 'user_profile.html', context)
@@ -92,8 +93,9 @@ def create_user_profile(request):
     if request.method == 'POST':
         form = UserProfileForm(request.POST)
         if form.is_valid():
-            form.save()
-            messages.success(request, 'Profile created successful!')
+            user_profile = form.save(commit=False)
+            user_profile.user = request.user  # Assign the current user to the user_profile.user field
+            user_profile.save()
             return redirect('user_profile')
     else:
         form = UserProfileForm()
