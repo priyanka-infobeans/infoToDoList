@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Blog
 from .models import Comment
+from .models import Contact
 
 @admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):
@@ -9,3 +10,4 @@ class BlogAdmin(admin.ModelAdmin):
     search_fields = ('title', 'content')
 
 admin.site.register(Comment)
+admin.site.register(Contact)

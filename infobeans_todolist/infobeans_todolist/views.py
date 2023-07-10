@@ -72,6 +72,7 @@ def user_register(request):
         form = RegistrationForm()
     return render(request, 'register.html', {'form': form})
 
+@login_required
 def my_profile(request):
     try:
         user_profile = UserProfile.objects.get(user=request.user)

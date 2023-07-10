@@ -46,9 +46,8 @@
                     <div class="down-content">
                       <a href=""><h4>{{ blog.title }}</h4></a>
                       <ul class="post-info">
-                        <li><a href="#">{{ blog.user.username }}</a></li>
+                        <li><a href="#">{{ blog.user_id.username }}</a></li>
                         <li><a href="#">{{ blog.created_on |date:"F j, Y" }}</a></li>
-                        <li><a href="#">10 Comments</a></li>
                       </ul>
                       <p>{{ blog.content | safe }}</p>
                     </div>

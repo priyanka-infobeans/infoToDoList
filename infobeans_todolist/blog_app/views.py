@@ -6,7 +6,9 @@ from django.shortcuts import render, redirect
 from .forms import BlogForm
 from django.contrib.auth.models import User
 from .models import Blog,Comment
-from .forms import CommentForm
+from .forms import CommentForm, ContactForm
+from django.contrib import messages
+from infobeans_todolist.models import UserProfile
 def index_view(request):
     blogs = Blog.objects.all()
 
@@ -20,9 +22,6 @@ class about_view(TemplateView):
 
 class blog_view(TemplateView):
     template_name = 'blog_app/blog.html'
-
-class contact_view(TemplateView):
-    template_name = 'blog_app/contact.html'
 def create_blog(request):
     if request.method == 'POST':
         form = BlogForm(request.POST, request.FILES)
@@ -89,3 +88,30 @@ def blog_delete(request, pk):
     print(pk)
     blog.delete()
     return redirect('blog_app:index')
+
+def contact_view(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.error(request, 'Thank you for contacting us! We will get back to you soon.')
+            return redirect('blog_app:contact')
+    else:
+        form = ContactForm()
+
+    context = {'form': form}
+    return render(request, 'blog_app/contact.html', context)
+
+def contact_success(request):
+    return render(request, 'contact_success.html')
+
+def my_profile(request):
+    try:
+        user_profile = UserProfile.objects.get(user=request.user)
+        context = {
+            'user': user_profile
+        }
+        return render(request, 'blog_app/myprofile.html', context)
+    except UserProfile.DoesNotExist:
+        messages.warning(request, 'User profile does not exist.')
+        return redirect('blog_app/index.html')  # Redirect to a relevant page
