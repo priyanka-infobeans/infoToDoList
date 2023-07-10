@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from infobeans_todolist import views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,9 +25,13 @@ urlpatterns = [
     path('login/', views.user_login, name='login'),
     path('register/', views.user_register, name='register'),
     path('logout/', views.user_logout, name='logout'),
-    path('create/', views.create_user_profile, name='create_user_profile'),
-    path('user_profile/<str:name>/', views.user_profile, name='user_profile'),
+    path('create_profile/', views.create_profile, name='create_profile'),
+    path('myprofile/',views.my_profile,name='myprofile'),
     path('todolist_app/', include('todolist_app.urls')),
     path('blog_app/', include('blog_app.urls')),
+    path('comments/', include('blog_app.urls')),
     path('social_app/', include('social_app.urls')),
-]
+    path('groups/', include('groups.urls', namespace='groups')),
+    path('posts/', include('posts.urls', namespace='posts')),
+    path('accounts/', include('accounts.urls', namespace='accounts')),
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

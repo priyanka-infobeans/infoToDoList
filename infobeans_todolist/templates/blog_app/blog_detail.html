@@ -1,0 +1,100 @@
+{% extends 'blog_app/base.html' %}
+{% block body_block %}
+{% load static %}
+  <!-- Page Content -->
+    <!-- Banner Starts Here -->
+    <div class="heading-page header-text">
+      <section class="page-heading">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="text-content">
+                <h4>Post Details</h4>
+                <h2>Single blog post</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  <section class="blog-posts grid-system">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="all-blog-posts">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="blog-post">
+                    <div class="single-blog-item">
+                    {% if blog.blog_image %}
+                      <img
+                      src="{{ blog.blog_image.url }}"
+                      alt="blog-image"
+                      class="img-fluid rounded"
+                    />
+                    {% endif %}
+                    {% if user.is_authenticated and user == blog.user_id %}
+                      <div class="blog-item-icons">
+                        <a style="font-size: 30px" href="{% url 'blog_app:blog_update' blog.id %}" class="edit-icon">
+                          <i class="fa fa-edit"></i>
+                        </a>&nbsp;&nbsp;
+                        <a style="font-size: 30px" href="{% url 'blog_app:blog_delete' pk=blog.pk %}" class="delete-link" data-blog-id="{{ blog.pk }}">
+                          <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a>
+                      </div>
+                    {% endif %}
+                    <div class="down-content">
+                      <a href=""><h4>{{ blog.title }}</h4></a>
+                      <ul class="post-info">
+                        <li><a href="#">{{ blog.user.username }}</a></li>
+                        <li><a href="#">{{ blog.created_on |date:"F j, Y" }}</a></li>
+                        <li><a href="#">10 Comments</a></li>
+                      </ul>
+                      <p>{{ blog.content | safe }}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="sidebar-item comments">
+                    <div class="sidebar-heading">
+                      <h2>{{ comment_count }} comments</h2>
+                    </div>
+                    <div class="content">
+                      <ul>
+                        {% for comment in comments %}
+                        <li>
+                          <div class="author-thumb">
+                            <img src="{% static 'blog_app/images/comment-author-01.jpg' %}" alt="">
+                          </div>
+                          <div class="right-content">
+                            <h4>{{ comment.author }}<span>{{ comment.timestamp|date:"F j, Y" }}</span></h4>
+                            <p>{{ comment.content }}</p>
+                          </div>
+                        </li><br/>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="sidebar-item submit-comment">
+                    <div class="sidebar-heading">
+                      <h2>Your comment</h2>
+                    </div>
+                    <div class="content">
+                      <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit">Submit</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+{% endblock %}

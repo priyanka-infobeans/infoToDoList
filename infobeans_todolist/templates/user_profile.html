@@ -1,14 +1,50 @@
-{% extends 'base.html' %}
-{% block content %}
-    <h1>User Profile</h1>
-    <h2>{{ user_profile.user.username }}</h2>
-    <p>{{ user_profile.email }}</p>
-    <p>{{ user_profile.bio }}</p>
-    {% if user_profile.profile_photo %}
-        <img src="{{ user_profile.profile_photo.url }}" alt="Profile Photo">
-    {% endif %}
-
-    {% if user_profile.user.username %}
-        <a href="{% url 'user_profile' user_profile.user.username %}">View Profile</a>
-    {% endif %}
+{% extends "base.html" %}
+{% block body_block %}
+{% load static %}
+<style>
+    body {
+        color: white;
+    }
+</style>
+    <div class="container">
+        <div class="row" style="margin-top:50px">
+            <div class="col-md-12">
+                <div class="card card-white mt-100">
+                    <div class="card-body">
+                      <h2 class="text-center">User Profile</h2>
+                          <form enctype="multipart/form-data"id="contact-form" class="contact__form" method="POST">
+                            <center>
+                                <h3 class="text-md mb-4">
+                                    {% if user.is_authenticated %}
+                                    Hey {{ user.name|upper }} !
+                                    {% endif %}
+                                </h3>
+                            </center>
+                            <center>
+                                {% if user.profile_photo %}
+                                <img  class="img-profile-pic" src="{{ user.profile_photo.url }}" alt="Profile Picture">
+                                {% else %}
+                                <p>No profile picture available.</p>
+                                {% endif %}
+                            </center>
+                            <label>name</label>
+                            <input class="form-control" type="text" value="{{user.name}}" disabled>
+                            <label>Email</label>
+                            <input class="form-control" type="text" value="{{user.email}}" disabled>
+                         <!-- <div class="form-group">
+                            <label>Social Handle</label>
+                            <input class="form-control" type="text" value="{{ user.social_handle }}" disabled>
+                          </div>
+                          <div class="form-group">
+                            <label>Profession</label>
+                            <input class="form-control" type="text" value="{{ user.profession }}" disabled>
+                          </div>-->
+                            <label>Bio</label>
+                              <textarea class="form-control"  disabled>{{ user.bio }}</textarea>
+                      </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

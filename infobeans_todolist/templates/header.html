@@ -20,11 +20,9 @@
             <li class="nav-item">
               <a class="nav-link text-light" href="{% url 'todolist_app:task_add' %}">Add Task</a>
             </li>
-                {% if user_profile.user.username %}
-                    <li class="nav-item">
-                      <a class="nav-link text-light" href="{% url 'user_profile' user_profile.user.name %}">User Profile</a>
-                    </li>
-                {% endif %}
+            <li class="nav-item">
+              <a class="nav-link text-light" href="{% url 'myprofile' %}">My Profile</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link text-light" href="{% url 'logout' %}">Logout</a>
             </li>

@@ -1,4 +1,21 @@
 $(document).ready(function() {
+    $('.delete-link').on('click', function(event) {alert('hi');
+      event.preventDefault();
+      var blogId = $(this).data('blog-id');
+      var confirmDelete = confirm('Are you sure you want to delete this blog?');
+      if (confirmDelete) {
+        $.ajax({
+          url: '{% url 'blog_app:blog_delete' pk=0 %}'.replace('0', blogId),
+          method: 'POST',
+          success: function() {
+            window.location.reload();
+          },
+          error: function() {
+            alert('An error occurred while deleting the blog.');
+          }
+        });
+      }
+    });
   if ($('.task-checkbox').is(':checked')) {
     $(this).next('#task-title').css('text-decoration', 'line-through');
   } else {

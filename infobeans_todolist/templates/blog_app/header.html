@@ -1,13 +1,13 @@
 <!-- Header -->
 {% block header_block %}
     <!-- ***** Preloader Start ***** -->
-    <div id="preloader">
-        <div class="jumper">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div>
+<!--    <div id="preloader">-->
+<!--        <div class="jumper">-->
+<!--            <div></div>-->
+<!--            <div></div>-->
+<!--            <div></div>-->
+<!--        </div>-->
+<!--    </div>-->
     <!-- ***** Preloader End ***** -->
 
     <!-- Header -->
@@ -28,11 +28,8 @@
               <li class="nav-item ">
                 <a class="nav-link" href="{% url 'blog_app:about' %}">About Us</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'blog_app:blog' %}">Blog Entries</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'blog_app:post_details' %}">Post Details</a>
+               <li class="nav-item">
+                <a class="nav-link" href="{% url 'blog_app:create' %}">Post Create</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'blog_app:contact' %}">Contact Us</a>

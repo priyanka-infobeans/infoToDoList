@@ -1,0 +1,14 @@
+{% extends "social_app/base.html" %}
+{% block body_block %}
+<style>
+    html { overflow-y: scroll; overflow-x:hidden; }
+body { position: absolute; }
+</style>
+<div class="posts-page">
+	<div class="content">
+		{% block prepost%}{% endblock %}
+		{% block post_content %}{% endblock %}
+		{% block post_post%}{% endblock %}
+	</div>
+</div>
+{% endblock %}

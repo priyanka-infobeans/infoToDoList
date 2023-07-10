@@ -43,10 +43,7 @@ class UserProfileForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['name'].widget.attrs.update({'class': 'form-control'})
-        self.fields['email'].widget.attrs.update({'class':'form-control'})
-        self.fields['bio'].widget.attrs.update({'class': 'form-control'})
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        self.fields['name'].widget.attrs.update({'class': 'form-control mb-4'})
+        self.fields['email'].widget.attrs.update({'class':'form-control mb-4'})
+        self.fields['bio'].widget.attrs.update({'class': 'form-control mb-2'})
         self.fields['profile_photo'].required = False
