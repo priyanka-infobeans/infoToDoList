@@ -1,0 +1,230 @@
+{% extends "base.html" %}
+{% block content %}
+  <main id="main">
+    <!-- ======= Hero Slider Section ======= -->
+    <section id="hero-slider" class="hero-slider">
+      <div class="container-md" data-aos="">
+        <div class="row">
+          <div class="col-12">
+            <div class="swiper sliderFeaturedPosts">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <a href="#" class="img-bg d-flex align-items-end" style="text-decoration:none;background-image: url({{ url_for('static', filename='img/slider1.jpg') }})">
+                    <div class="img-bg-inner">
+                        <h1 class="text-white text-center">More Than Thousands Book Over Here</h1>
+                        <div class="space-40"></div>
+                    </div>
+                  </a>
+                </div>
+                <div class="swiper-slide">
+                  <a href="#" class="img-bg d-flex align-items-end" style="background-image: url({{ url_for('static', filename='img/slider2.jpg') }})">
+                    <div class="img-bg-inner">
+                        <h1 class="text-white text-center">Find One for You!</h1>
+                        <div class="space-40"></div>
+                    </div>
+                  </a>
+                </div>
+                <div class="swiper-slide">
+                  <a href="#" class="img-bg d-flex align-items-end" style="background-image: url({{ url_for('static', filename='img/slider3.jpg') }})">
+                    <div class="img-bg-inner">
+                        <h1 class="text-white text-center">Start your Reading Journey!</h1>
+                        <div class="space-40"></div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="custom-swiper-button-next">
+                <span class="bi-chevron-right"></span>
+              </div>
+              <div class="custom-swiper-button-prev">
+                <span class="bi-chevron-left"></span>
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Hero Slider Section -->
+
+    <!-- ======= Post Grid Section ======= -->
+    <section id="posts" class="posts">
+        <div class="container" data-aos="">
+            <div class="row">
+                {% for book in books.items %}
+                    <div class="col-xs-12 mb-4">
+                        <div class="category-item well yellow">
+                            <div class="media row">
+                                <div class="media-left">
+                                    <img src="images/book/book-xs-1.jpg" class="media-object" alt="">
+                                </div>
+                                <div class="media-body">
+                                    <h5><b>{{ book.title }}</b></h5>
+                                    <h6>By {{ book.author }}</h6>
+                                    <h6>category: {{ book.category }}</h6>
+                                    <div class="space-10"></div>
+                                    <p>Rating:
+                                        {% for _ in range(book.rating|int) %}
+                                            <span class="fa fa-star checked"></span>
+                                        {% endfor %}
+                                        <span class="fa fa-star"></span>
+                                    </p>
+                                   <!-- <ul class="list-inline list-unstyled rating-star">
+                                        <li class="active"><i class="icofont icofont-star"></i></li>
+                                        <li class="active"><i class="icofont icofont-star"></i></li>
+                                        <li class="active"><i class="icofont icofont-star"></i></li>
+                                        <li class="active"><i class="icofont icofont-star"></i></li>
+                                        <li><i class="icofont icofont-star"></i></li>
+                                    </ul>-->
+                                    <div class="space-10"></div>
+                                    <p>{{ book.summary| truncate(100) }}</p>
+                                    <a href="{{ url_for('core.book_details', book_id=book.id) }}" class="text-primary">See the Book</a>
+                                        <!-- Button to trigger display of review form for each book -->
+                                        {% if current_user.is_authenticated %}
+                                        <button type="button" class="btn btn-success btn-green show-review-form" data-book-id="{{ book.id }}">Leave Review</button>
+                                        {% endif %}
+                                        <!-- Hidden review form for each book -->
+                                        <div class="review-form" id="review-form-{{ book.id }}" style="display: none;">
+                                            <form method="POST" class="add-review-form" id="review-form" data-book-id="{{ book.id }}">
+                                                {{ form.csrf_token }}
+                                                <div class="form-group">
+                                                    {{ form.rating.label }} {{ form.rating(class="form-control") }}
+                                                    <!--<div id="star-rating"></div>
+                                                    <input type="hidden" name="rating" id="rating">-->
+                                                </div>
+                                                <div class="form-group">
+                                                {{ form.review.label }} {{ form.review(class="form-control") }}
+                                                </div>
+                                                  <button type="button" id="review-form-submit-{{ book.id }}" class="btn btn-success">Submit Review</button>
+                                                <!-- Close button to hide the review form -->
+                                                <button type="button" class="btn btn-danger close-review-form" data-book-id="{{ book.id }}">Close</button>
+                                            </form>
+                                        </div>
+                                </div>
+                                <div class="col mb-4 ml-4">
+                                    <!-- Display the book image here -->
+                                    {% if book.image %}
+                                        <img src="{{ url_for('static', filename='img/' + book.image) }}" alt="{{ book.title }}" class="img-fluid rounded float-right" width="300" height="300">
+                                    {% else %}
+                                    <p>No image available</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                  <!--  <div class="col-xs-12 col-md-6">
+                        <div class="category-item well yellow">
+                            <div class="media">
+                                <div class="media-left">
+                                    <img src="images/book/book-xs-2.jpg" class="media-object" alt="">
+                                </div>
+                                <div class="media-body">
+                                    <h5>The Art Of The Surf</h5>
+                                    <h6>By Mako Sheffield</h6>
+                                    <div class="space-10"></div>
+                                    <ul class="list-inline list-unstyled rating-star">
+                                        <li class="active"><i class="icofont icofont-star"></i></li>
+                                        <li class="active"><i class="icofont icofont-star"></i></li>
+                                        <li class="active"><i class="icofont icofont-star"></i></li>
+                                        <li class=""><i class="icofont icofont-star"></i></li>
+                                        <li><i class="icofont icofont-star"></i></li>
+                                    </ul>
+                                    <div class="space-10"></div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor </p>
+                                    <a href="books.html" class="text-primary">See the Book</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+                </div>
+      </div>
+    </section> <!-- End Post Grid Section -->
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            {% if books.has_prev %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('index', page=books.prev_num) }}">Previous</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">Previous</span>
+            </li>
+            {% endif %}
+
+            {% for page_num in books.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                {% if books.page == page_num %}
+                <li class="page-item active">
+                    <span class="page-link">{{ page_num }}</span>
+                </li>
+                {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('index', page=page_num) }}">{{ page_num }}</a>
+                </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if books.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('index', page=books.next_num) }}">Next</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">Next</span>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+  </main><!-- End #main -->
+<!-- Include jQuery library -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+    //$('.star-rating').raty();
+    var bookId = '';
+    $(".show-review-form").on("click", function() {
+        var bookId = $(this).data("book-id");
+        $("#review-form-" + bookId).slideDown("slow");
+    });
+
+    $(".close-review-form").on("click", function() {
+        var bookId = $(this).data("book-id");
+        $("#review-form-" + bookId).slideUp("slow");
+    });
+    // When the "Submit Review" button is clicked
+    $("#review-form-submit" + bookId).on("click", function() {alert('hi');
+      // Get the form data
+      var bookId = $("#review-form").data("book-id");
+      var rating = $("#rating").val(); // Assuming you have an input field with ID "rating"
+      var reviewText = $("#review").val(); // Assuming you have a textarea with ID "review-text"
+
+      // Create an object to store the form data
+      var formData = {
+        book_id: bookId,
+        rating: rating,
+        review_text: reviewText
+      };
+
+      // Send the form data to the server using AJAX
+      $.ajax({
+        url: "/submit_review", // URL to your Flask view function for handling form submission
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(formData),
+        success: function(response) {
+          // Handle the server response here if needed
+          // For example, you can update the reviews section dynamically
+
+          // For now, just reload the page to see the updated reviews
+          location.reload();
+        },
+        error: function(error) {
+          // Handle any errors that occur during form submission
+          console.log("Error:", error);
+        }
+      });
+    });
+  });
+</script>
+{% endblock %}
+

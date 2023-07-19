@@ -1,0 +1,37 @@
+{% block header %}
+  <!-- ======= Header ======= -->
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+      <a href="{{url_for('core.index')}}" class="logo d-flex align-items-center">
+        <img src="https://www.infobeans.com/wp-content/themes/infobeans/assets/images/logo-infobeans-white.svg" alt="">
+      </a>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="{{url_for('core.index')}}">Home</a></li>
+          <li><a href="{{url_for('core.info')}}">About</a></li>
+          <li><a href="{{url_for('core.book_list')}}">Books</a></li>
+          {% if current_user.is_authenticated %}
+            <li>
+                <a href="{{url_for('users.logout')}}">Log Out</a>
+            </li>
+            <li>
+                <a href="{{url_for('users.account')}}">Account</a>
+            </li>
+          {% else %}
+            <li>
+                <a href="{{url_for('users.login')}}">Log In</a>
+            </li>
+            <li>
+                <a href="{{url_for('users.register')}}">Register</a>
+            </li>
+          {% endif %}
+        </ul>
+      </nav><!-- .navbar -->
+      <div class="position-relative">
+        <a href="https://www.facebook.com/infobeans" class="mx-2"><span class="bi-facebook"></span></a>
+        <a href="https://www.twitter.com/infobeans" class="mx-2"><span class="bi-twitter"></span></a>
+        <a href="https://www.linkedin.com/company/infobeans" class="mx-2"><span class="bi-linkedin"></span></a>
+      </div>
+    </div>
+  </header><!-- End Header -->
+{% endblock %}

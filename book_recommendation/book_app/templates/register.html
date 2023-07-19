@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+  <main id="main">
+    <section>
+      <div class="container">
+        <div class="wrapper fadeInDown">
+          <div id="formContent">
+          <!-- Tabs Titles -->
+           <!-- Icon -->
+            <div class="fadeIn first padding60">
+              <h1>Register</h1>
+<!--              <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />-->
+            </div>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                  {% for category, message in messages %}
+                    {% if category == 'error' %}
+                      <div class="alert alert-danger ml-4 mr-4" role="alert">
+                        {{ message }}
+                      </div>
+                    {% endif %}
+                  {% endfor %}
+              {% endif %}
+            {% endwith %}
+            <!-- Login Form -->
+            <form method="POST">
+            {{form.hidden_tag()}}
+            {{form.email(id="login",class="fadeIn second",placeholder="Enter Email ID")}}<br>
+            {{form.username(id="login",class="fadeIn second",placeholder="Enter Username")}}<br>
+            {{form.password(id="login",class="fadeIn second",placeholder="Enter Password")}}<br>
+            {{form.pass_confirm(id="login",class="fadeIn second",placeholder="Enter Confirm Password")}}<br>
+            {{form.submit(class="fadeIn fourth btn btn-success")}}
+          </form>
+        </div>
+      </div>
+      </div>
+    </section>
+  </main>
+{% endblock %}

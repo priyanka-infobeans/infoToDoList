@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block content %}
+  <main id="main">
+     <section>
+      <div class="container" data-aos="">
+        <div class="row">
+          <div class="col-lg-12 text-center mb-5">
+            <h2 class="page-title">{{ book.title }}</h2>
+          </div>
+        </div>
+          <div class="row">
+              <div class="col-6 padding60">
+                <h4>{{ book.title }}</h4>
+                <p>Author: {{ book.author }}</p>
+                <p>Rating:
+                    {% for _ in range(book.rating|int) %}
+                        <span class="fa fa-star checked"></span>
+                    {% endfor %}
+                    <span class="fa fa-star"></span>
+                </p>
+                <p>{{ book.summary }}</p>
+                  <!-- Display Reviews -->
+                <div class="reviews">
+                  <h5>Reviews:</h5>
+                  {% if reviews %}
+                    <ul>
+                      {% for review in reviews %}
+                        <li>
+                          <p>Rating: {{ review.rating }}</p>
+                          <p>{{ review.review }}</p>
+                          <hr>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  {% else %}
+                    <p>No reviews yet.</p>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="col-6">
+                <!-- Display the book image here -->
+                {% if book.image %}
+                <img src="{{ url_for('static', filename='img/' + book.image) }}" alt="{{ book.title }}" class="img-fluid" width="500px" height="500px">
+                {% else %}
+                <p>No image available</p>
+                {% endif %}
+              </div>
+          </div>
+      </div>
+     </section>
+  </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Fetch categories and authors from the API endpoint
+        $(document).ready(function() {
+            $.getJSON('/api/categories_and_authors', function(data) {
+                var categories = data.categories;
+                var authors = data.authors;
+
+                // Populate categories dropdown
+                var categoriesDropdown = $('#category-filter');
+                categoriesDropdown.empty();
+                categoriesDropdown.append('<option value="">All Categories</option>');
+                $.each(categories, function(index, category) {
+                    categoriesDropdown.append('<option value="' + category + '">' + category + '</option>');
+                });
+
+                // Populate authors dropdown
+                var authorsDropdown = $('#author-filter');
+                authorsDropdown.empty();
+                authorsDropdown.append('<option value="">All Authors</option>');
+                $.each(authors, function(index, author) {
+                    authorsDropdown.append('<option value="' + author + '">' + author + '</option>');
+                });
+            });
+        });
+    </script>
+{% endblock %}

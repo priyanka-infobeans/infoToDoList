@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block content %}
+  <main id="main">
+    <section class="gray-bg" id="sc2">
+        <div class="space-80"></div>
+        <div class="container">
+            <div class="row mx-auto">
+                <div class=" text-center">
+                    <h1>About <strong>Us</strong></h1>
+                    <div class="space-20"></div>
+                    <div class="title-bar blue">
+                        <ul class="list-inline list-unstyled">
+                            <li><i class="icofont icofont-square"></i></li>
+                            <li><i class="icofont icofont-square"></i></li>
+                        </ul>
+                    </div>
+                    <div class="space-30"></div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut gravida, quam vitae est Sed non eros elementum nulla sodales ullamcorper.</p>
+                </div>
+            </div>
+            <div class="space-60"></div>
+            <div class="row fix">
+                <div class="hidden-xs hidden-sm col-sm-5 pull-right  wow fadeInRight" style="visibility: visible; animation-name: fadeInRight;">
+                    <div class="space-60"></div>
+                    <div class="my-slider cardslider cardslider--direction-down">
+                        <ul class="cardslider__cards">
+                            <li class="cardslider__card cardslider__card--transitions cardslider__card--index-0" aria-hidden="false" style="z-index: 5;"><img src="{{ url_for('static', filename='img/slide1.jpg') }}" alt="library"></li>
+                            <li class="cardslider__card cardslider__card--transitions cardslider__card--index-1" style="z-index: 4;"><img src="{{ url_for('static', filename='img/slide2.jpg') }}" alt="library"></li>
+                            <li class="cardslider__card cardslider__card--transitions cardslider__card--index-2" style="z-index: 3;"><img src="{{ url_for('static', filename='img/slide3.jpg') }}" alt="library"></li>
+                        </ul>
+                    <div class="cardslider__direction-nav"><button title="next" class="cardslider__nav-next">Next</button><button title="previous" class="cardslider__nav-prev">Prev</button></div></div>
+                    <div class="mama"></div>
+                </div>
+                <div class="col-xs-12 col-md-7">
+                    <ul class="list-unstyled list-inline text-yellow tip">
+                        <li><i class="icofont icofont-square"></i></li>
+                        <li><i class="icofont icofont-square"></i></li>
+                        <li><i class="icofont icofont-square"></i></li>
+                    </ul>
+                    <div class="space-15"></div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ultricies eros pellentesque eros interdum, a efficitur tellus malesuada. Nunc non metus quis elit dictum ultricies. Quisque ultricies aliquam arcu.</p>
+                    <div class="space-60"></div>
+                    <div class="row fix">
+                        <div class="col-xs-12 col-sm-6 wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
+                            <ul class="list-unstyled list-inline icon-bar">
+                                <li><i class="icofont icofont-id-card"></i></li>
+                            </ul>
+                            <h3>Member Card</h3>
+                            <p>Lorem ipsum dolor sit amet, consecte tur adipiscing elit. Nullam ultricies eros pellentesque
+                            </p>
+                            <div class="space-30"></div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
+                            <ul class="list-unstyled list-inline icon-bar">
+                                <li><i class="icofont icofont-medal-alt"></i></li>
+                            </ul>
+                            <h3>High Quality Books</h3>
+                            <p>Lorem ipsum dolor sit amet, consecte tur adipiscing elit. Nullam ultricies eros pellentesque
+                            </p>
+                            <div class="space-30"></div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
+                            <ul class="list-unstyled list-inline icon-bar">
+                                <li><i class="icofont icofont-read-book-alt"></i></li>
+                            </ul>
+                            <h3>Free All Books</h3>
+                            <p>Lorem ipsum dolor sit amet, consecte tur adipiscing elit. Nullam ultricies eros pellentesque
+                            </p>
+                            <div class="space-30"></div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
+                            <ul class="list-unstyled list-inline icon-bar">
+                                <li><i class="icofont icofont-book-alt"></i></li>
+                            </ul>
+                            <h3>Up To Date Books</h3>
+                            <p>Lorem ipsum dolor sit amet, consecte tur adipiscing elit. Nullam ultricies eros pellentesque
+                            </p>
+                            <div class="space-30"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="space-60"></div>
+    </section>
+  </main><!-- End #main -->
+{% endblock %}

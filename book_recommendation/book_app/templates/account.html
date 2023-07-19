@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+  <main id="main">
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center mb-5">
+            {% if current_user.is_authenticated %}
+              <h2 class="page-title">Welcome to the book club {{current_user.username}}</h2>
+            <div class="padding60"></div>
+            <div clas="col">
+              <p><b>Username:</b> {{ current_user.username }}</p>
+              <p><b>Email:</b> {{ current_user.email }}</p>
+            {% else %}
+              <h1>Please log in to view your account.</h1>
+            {% endif %}
+<!--            <img align='center' src="{{ url_for('static', filename='profile_pics/' + current_user.profile_image) }}">-->
+<!--            <p>{{ current_user.email }}</p>-->
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+{% endblock %}
